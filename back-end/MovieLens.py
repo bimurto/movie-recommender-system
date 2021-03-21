@@ -71,7 +71,10 @@ class MovieLens:
                     hitUser = True
                 if (hitUser and (user != userID)):
                     break
-
+        userRatings = sorted(userRatings, key=lambda x: x.get("rating"), reverse=True)
+        print("User Ratings")
+        for rating in userRatings:
+            print(rating.get("movieName"), rating.get("rating"), rating.get("poster_link"))
         return userRatings
 
     def getPopularityRanks(self):
