@@ -13,6 +13,7 @@ import numpy as np
 class MovieLens:
     movieID_to_name = {}
     movieID_to_link = {}
+    movieID_to_genre = {}
     name_to_movieID = {}
     ratingsPath = '../ml-latest-small/ratings.csv'
     moviesPath = '../ml-latest-small/movies.csv'
@@ -38,6 +39,7 @@ class MovieLens:
                 movieID = int(row[0])
                 movieName = row[1]
                 self.movieID_to_name[movieID] = movieName
+                self.movieID_to_genre[movieID] = row[2]
                 self.name_to_movieID[movieName] = movieID
 
         with open(self.linkPath, newline='', encoding='ISO-8859-1') as csvfile:
@@ -66,7 +68,8 @@ class MovieLens:
                         "movieID": movieID,
                         "rating": rating,
                         "movieName": self.getMovieName(movieID),
-                        "poster_link": poster_link
+                        "poster_link": poster_link,
+                        "genre": self.movieID_to_genre.get(movieID)
                     })
                     hitUser = True
                 if (hitUser and (user != userID)):
@@ -157,6 +160,12 @@ class MovieLens:
     def getMovieName(self, movieID):
         if movieID in self.movieID_to_name:
             return self.movieID_to_name[movieID]
+        else:
+            return ""
+
+    def getMovieGenre(self, movieID):
+        if movieID in self.movieID_to_genre:
+            return self.movieID_to_genre[movieID]
         else:
             return ""
 

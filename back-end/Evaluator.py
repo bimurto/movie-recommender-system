@@ -88,7 +88,8 @@ class Evaluator:
                 result.append({
                     "movieName": ml.getMovieName(ratings[0]),
                     "estimatedRating": ratings[1],
-                    "poster_link": ml.getMoviePosterLink(ratings[0])
+                    "poster_link": ml.getMoviePosterLink(ratings[0]),
+                    "genre": ml.getMovieGenre(ratings[0])
                 })
                 print(ml.getMovieName(ratings[0]), ratings[1], ml.getMoviePosterLink(ratings[0]))
             self.recommendationDict[testSubject] = result

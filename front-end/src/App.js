@@ -55,18 +55,22 @@ class App extends React.Component {
         <p>Rated Movies:</p>
         <div style={{display:'flex', flexWrap:'wrap'}}>
           {this.state.userInfo.userRating && this.state.userInfo.userRating.map(tile => (
-            <div style={{ margin:10}}>
+            <div style={{ width:200, margin: 10}}>
               <img style={{width:200,height:300}} src={tile.poster_link} alt={tile.movieName} />
-              <p style={{textAlign:'center'}}>{'Rating: ' + tile.rating}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Name: ' + tile.movieName}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Rating: ' + tile.rating}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Genre: ' + tile.genre}</p>
             </div>
           ))}
         </div>
         <p>Recommended Movies:</p>
         <div style={{display:'flex', flexWrap:'wrap'}}>
           {this.state.userInfo.recommendation && this.state.userInfo.recommendation.map(tile => (
-            <div style={{ margin: 10}}>
+            <div style={{ width:200, margin: 10}}>
               <img style={{width:200,height:300}} src={tile.poster_link} alt={tile.movieName} />
-              <p style={{textAlign:'center'}}>{'Rating: ' + tile.estimatedRating}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Name: ' + tile.movieName}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Rating: ' + tile.estimatedRating}</p>
+              <p style={{textAlign:'center', overflowWrap:'anywhere'}}>{'Genre: ' + tile.genre}</p>
             </div>
           ))}
         </div>
