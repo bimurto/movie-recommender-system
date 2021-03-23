@@ -10,6 +10,7 @@ from EvaluatedAlgorithm import EvaluatedAlgorithm
 
 class Evaluator:
     algorithms = []
+    recommendationDict = {}
 
     def __init__(self, dataset, rankings):
         ed = EvaluationData(dataset, rankings)
@@ -58,6 +59,9 @@ class Evaluator:
 
     def SampleTopNRecs(self, ml, testSubject=85, k=10):
 
+        if testSubject in self.recommendationDict:
+            return self.recommendationDict.get(testSubject)
+
         for algo in self.algorithms:
             print("\nUsing recommender ", algo.GetName())
 
@@ -87,4 +91,5 @@ class Evaluator:
                     "poster_link": ml.getMoviePosterLink(ratings[0])
                 })
                 print(ml.getMovieName(ratings[0]), ratings[1], ml.getMoviePosterLink(ratings[0]))
+            self.recommendationDict[testSubject] = result
             return result

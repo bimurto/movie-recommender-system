@@ -16,14 +16,14 @@ class App extends React.Component {
   }  
 
   componentDidMount(){
-    // axios
-    //   .get("http://localhost:5000/user/"+this.state.userId)
-    //   .then( (response) => {
-    //     console.log(response);
-    //     this.setState({
-    //       userInfo : response.data
-    //     }, () => {console.log(this.state.userInfo)})
-    //   })
+    axios
+      .get("http://localhost:5000/user/"+this.state.userId)
+      .then( (response) => {
+        console.log(response);
+        this.setState({
+          userInfo : response.data
+        }, () => {console.log(this.state.userInfo)})
+      })
   }
 
   handleSubmit(event) {
@@ -53,13 +53,23 @@ class App extends React.Component {
           <input type="submit" value="Submit" />
         </form>
         <p>Rated Movies:</p>
-        {this.state.userInfo.userRating && this.state.userInfo.userRating.map(tile => (
-          <img style={{width:200,height:300, margin:10}} src={tile.poster_link} alt={tile.movieName} />
-        ))}
+        <div style={{display:'flex', flexWrap:'wrap'}}>
+          {this.state.userInfo.userRating && this.state.userInfo.userRating.map(tile => (
+            <div style={{ margin:10}}>
+              <img style={{width:200,height:300}} src={tile.poster_link} alt={tile.movieName} />
+              <p style={{textAlign:'center'}}>{'Rating: ' + tile.rating}</p>
+            </div>
+          ))}
+        </div>
         <p>Recommended Movies:</p>
-        {this.state.userInfo.recommendation && this.state.userInfo.recommendation.map(tile => (
-          <img style={{width:200,height:300, margin:10}} src={tile.poster_link} alt={tile.movieName} />
-        ))}
+        <div style={{display:'flex', flexWrap:'wrap'}}>
+          {this.state.userInfo.recommendation && this.state.userInfo.recommendation.map(tile => (
+            <div style={{ margin: 10}}>
+              <img style={{width:200,height:300}} src={tile.poster_link} alt={tile.movieName} />
+              <p style={{textAlign:'center'}}>{'Rating: ' + tile.estimatedRating}</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
